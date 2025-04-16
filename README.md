@@ -205,7 +205,6 @@ output_file = "output_file.txt.gz"
 df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
 
 ```
----
 
 
 ## 📊 Summary
