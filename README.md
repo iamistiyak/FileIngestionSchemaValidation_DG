@@ -70,14 +70,139 @@ This project explores efficient techniques for reading and processing a large CS
 > ✅ **Dask** outperformed the rest for large-scale ingestion in this setup.
 
 ---
+## Read the File Using Different Libraries
+
+```python
+# Using Pandas:
+
+from google.colab import drive
+import pandas as pd
+import time
+import os
+
+# Mount Google Drive
+
+# Read CSV and
+
+drive.mount('/content/drive')
+
+# Update this path to match your actual file location in Drive
+file_path = '/content/drive/MyDrive/DataAnalysis/Internship/DataGlaciers/Week-6/yellow-tripdata-2025-01.csv'
+
+# Check if file exists (optional but helpful for debugging)
+if not os.path.exists(file_path):
+  raise FileNotFoundError(f"File not found at: {file_path}")
+
+start = time.time()
+df_pandas = pd.read_csv(file_path)
+print("Pandas read time:", time.time() - start)
+
+---
+
+```python
+#Using Dask
+import dask.dataframe as dd
+from google.colab import drive
+import time
+import os
+
+# Mount Google Drive
+
+# Read CSV and time itdrive.mount('/content/drive')
+
+# Update this path to match your actual file location in Drive
+file_path = '/content/drive/MyDrive/DataAnalysis/Internship/DataGlaciers/Week-6/yellow-tripdata-2025-01.csv'
+
+# Check if file exists (optional but helpful for debugging)
+if not os.path.exists(file_path):
+    raise FileNotFoundError(f"File not found at: {file_path}")
+
+
+start = time.time()
+df_dask = dd.read_csv(file_path, assume_missing=True, blocksize="64MB")
+df_dask.head()
+
+print("Dask read time:", time.time() - start)
+
+
+---
+
+```python
+#Using Modin
+import modin.pandas as mpd
+import os
+os.environ["MODIN_ENGINE"] = "ray"
+from google.colab import drive
+import time
+import os
+
+# Mount Google Drive
+
+# Read CSV and time itdrive.mount('/content/drive')
+
+# Update this path to match your actual file location in Drive
+file_path = '/content/drive/MyDrive/DataAnalysis/Internship/DataGlaciers/Week-6/yellow-tripdata-2025-01.csv'
+
+
+start = time.time()
+df_modin = mpd.read_csv(file_path)
+print("Modin read time:", time.time() - start)
 
 ## 🧹 Column Cleaning
 
-Cleaned column names by:
+#Clean Column Names (Validation Step)
+
 - Stripping leading/trailing whitespace
 - Replacing special characters with `_` using regex
 
 ```python
+import re
+
 def clean_columns(df):
     df.columns = [re.sub(r'\W+', '_', col.strip()) for col in df.columns]
     return df
+
+df_clean = clean_columns(df_pandas.copy())  # use Pandas version for simplicity
+
+## Save column name 
+
+#This snippet saves the column names and CSV separator into a schema.yaml file for reference or reuse
+
+```python
+import yaml
+
+schema = {
+    "separator": ",",
+    "columns": list(df_clean.columns)
+}
+
+with open("schema.yaml", "w") as f:
+    yaml.dump(schema, f)
+
+## Validate Schema with YAML
+
+```python
+
+with open("schema.yaml") as f:
+    schema_yaml = yaml.safe_load(f)
+
+assert schema_yaml["columns"] == list(df_clean.columns), "Column names don't match"
+assert df_clean.shape[1] == len(schema_yaml["columns"]), "Column count mismatch"
+
+## Loads the saved schema and checks if the dataframe's columns match
+
+```python
+
+with open("schema.yaml") as f:
+    schema_yaml = yaml.safe_load(f)
+
+assert schema_yaml["columns"] == list(df_clean.columns), "Column names don't match"
+assert df_clean.shape[1] == len(schema_yaml["columns"]), "Column count mismatch"
+
+## Write File in Pipe-Separated Gz Format
+
+```python
+output_file = "output_file.txt.gz"
+df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
+
+
