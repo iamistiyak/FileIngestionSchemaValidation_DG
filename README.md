@@ -91,6 +91,9 @@ print("Pandas read time:", time.time() - start)
 ---
 
 ## Using Dask:
+
+```python
+
 import dask.dataframe as dd
 from google.colab import drive
 import time
