@@ -68,7 +68,7 @@ This project explores efficient techniques for reading and processing a large CS
 
 
 ```python
-# Using Pandas:
+## Using Pandas:
 
 from google.colab import drive
 import pandas as pd
@@ -89,7 +89,8 @@ start = time.time()
 df_pandas = pd.read_csv(file_path)
 print("Pandas read time:", time.time() - start)
 
----<br>
+```
+---
 
 # Using Dask:
 python
@@ -116,7 +117,9 @@ df_dask.head()
 
 print("Dask read time:", time.time() - start)
 
----<br>
+
+```
+---
 
 ```python
 #Using Modin:
@@ -140,7 +143,8 @@ start = time.time()
 df_modin = mpd.read_csv(file_path)
 print("Modin read time:", time.time() - start)
 
----<br>
+```
+---
 
 ```python
 🧹 Column Cleaning
@@ -162,6 +166,7 @@ def clean_columns(df):
 df_clean = clean_columns(df_pandas.copy())  # Use Pandas version for simplicity
 
 
+```
 ---<br>
 
 ```python
@@ -182,6 +187,7 @@ schema = {
 with open("schema.yaml", "w") as f:
     yaml.dump(schema, f)
 
+```
 ---<br>
 
 ```python
@@ -202,6 +208,7 @@ Edit
 output_file = "output_file.txt.gz"
 df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
 
+```
 ---<br>
 
 ```python
@@ -216,8 +223,11 @@ yaml
 Copy
 Edit
 
+```
 ---
 
 This `README.md` now contains the complete content in a proper format for GitHub or any markdown-rendering platform. It includes headings, code blocks, explanations, and necessary details about the project. You can simply copy this into a `.md` file and it will render properly. 
 
 Let me know if you need any further edits!
+
+
