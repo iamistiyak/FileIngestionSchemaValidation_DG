@@ -72,9 +72,9 @@ This project explores efficient techniques for reading and processing a large CS
 ---
 ## Read the File Using Different Libraries
 
-```python
-# Using Pandas:
+## Using Pandas:
 
+```python
 from google.colab import drive
 import pandas as pd
 import time
@@ -97,10 +97,12 @@ start = time.time()
 df_pandas = pd.read_csv(file_path)
 print("Pandas read time:", time.time() - start)
 
----
+
+
+## Using Pandas:
 
 ```python
-#Using Dask
+
 import dask.dataframe as dd
 from google.colab import drive
 import time
@@ -127,8 +129,9 @@ print("Dask read time:", time.time() - start)
 
 ---
 
+## Using Modin
 ```python
-#Using Modin
+
 import modin.pandas as mpd
 import os
 os.environ["MODIN_ENGINE"] = "ray"
@@ -163,6 +166,8 @@ def clean_columns(df):
     return df
 
 df_clean = clean_columns(df_pandas.copy())  # use Pandas version for simplicity
+
+---
 
 ## Save column name 
 
