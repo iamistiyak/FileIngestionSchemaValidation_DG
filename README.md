@@ -65,9 +65,11 @@ This project explores efficient techniques for reading and processing a large CS
 
 ## 📚 Read the File Using Different Libraries
 
-### Using Pandas:
+
 
 ```python
+# Using Pandas:
+
 from google.colab import drive
 import pandas as pd
 import time
@@ -86,7 +88,10 @@ if not os.path.exists(file_path):
 start = time.time()
 df_pandas = pd.read_csv(file_path)
 print("Pandas read time:", time.time() - start)
-Using Dask:
+
+---<br>
+
+# Using Dask:
 python
 Copy
 Edit
@@ -110,7 +115,11 @@ df_dask = dd.read_csv(file_path, assume_missing=True, blocksize="64MB")
 df_dask.head()
 
 print("Dask read time:", time.time() - start)
-Using Modin:
+
+---<br>
+
+```python
+#Using Modin:
 python
 Copy
 Edit
@@ -130,6 +139,10 @@ file_path = '/content/drive/MyDrive/DataAnalysis/Internship/DataGlaciers/Week-6/
 start = time.time()
 df_modin = mpd.read_csv(file_path)
 print("Modin read time:", time.time() - start)
+
+---<br>
+
+```python
 🧹 Column Cleaning
 Column Name Cleaning (Validation Step)
 
@@ -147,6 +160,12 @@ def clean_columns(df):
     return df
 
 df_clean = clean_columns(df_pandas.copy())  # Use Pandas version for simplicity
+
+
+---<br>
+
+```python
+
 💾 Save Column Names
 This snippet saves the column names and CSV separator into a schema.yaml file for reference or reuse.
 
@@ -162,6 +181,11 @@ schema = {
 
 with open("schema.yaml", "w") as f:
     yaml.dump(schema, f)
+
+---<br>
+
+```python
+
 ✅ Validate Schema with YAML
 python
 Copy
@@ -177,6 +201,10 @@ Copy
 Edit
 output_file = "output_file.txt.gz"
 df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
+
+---<br>
+
+```python
 📊 Summary
 Total Rows: 3.47 million+
 
