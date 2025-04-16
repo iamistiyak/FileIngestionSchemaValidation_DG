@@ -91,21 +91,18 @@ print("Pandas read time:", time.time() - start)
 ---
 
 ## Using Dask:
-python
-Copy
-Edit
 import dask.dataframe as dd
 from google.colab import drive
 import time
 import os
 
-# Mount Google Drive
+#Mount Google Drive
 drive.mount('/content/drive')
 
-# Update this path to match your actual file location in Drive
+#Update this path to match your actual file location in Drive
 file_path = '/content/drive/MyDrive/DataAnalysis/Internship/DataGlaciers/Week-6/yellow-tripdata-2025-01.csv'
 
-# Check if file exists (optional but helpful for debugging)
+#Check if file exists (optional but helpful for debugging)
 if not os.path.exists(file_path):
     raise FileNotFoundError(f"File not found at: {file_path}")
 
