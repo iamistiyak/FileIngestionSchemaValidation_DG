@@ -118,7 +118,6 @@ print("Dask read time:", time.time() - start)
 ```
 ---
 
-
 ## Using Modin:
 
 ```python
@@ -130,10 +129,10 @@ from google.colab import drive
 import time
 import os
 
-# Mount Google Drive
+#Mount Google Drive
 drive.mount('/content/drive')
 
-# Update this path to match your actual file location in Drive
+#Update this path to match your actual file location in Drive
 file_path = '/content/drive/MyDrive/DataAnalysis/Internship/DataGlaciers/Week-6/yellow-tripdata-2025-01.csv'
 
 start = time.time()
@@ -145,13 +144,13 @@ print("Modin read time:", time.time() - start)
 
 ## 🧹 Column Cleaning
 
-```python
 
-# Column Name Cleaning (Validation Step)
+#Column Name Cleaning (Validation Step)
 
-# Stripping leading/trailing whitespace
+#Stripping leading/trailing whitespace
 
-# Replacing special characters with _ using regex
+#Replacing special characters with _ using regex
+
 
 ```python 
 import re
@@ -161,7 +160,6 @@ def clean_columns(df):
     return df
 
 df_clean = clean_columns(df_pandas.copy())  # Use Pandas version for simplicity
-
 
 ```
 ---
