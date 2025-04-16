@@ -3,7 +3,7 @@
 This project explores efficient techniques for reading and processing a large CSV dataset using Python libraries like **Pandas**, **Dask**, and **Modin**. The file used is a sample of NYC Yellow Taxi trip data.
 
 ---
-Task:
+<b>Task:<b> <br>
 • Take any csv/text file of 2+ GB of your choice. --- (You can do this assignment on Google colab)
 
 •  Read the file ( Present approach of reading the file )
