@@ -66,10 +66,8 @@ This project explores efficient techniques for reading and processing a large CS
 ## 📚 Read the File Using Different Libraries
 
 
-
-```python
 ## Using Pandas:
-
+```python
 from google.colab import drive
 import pandas as pd
 import time
@@ -92,7 +90,7 @@ print("Pandas read time:", time.time() - start)
 ```
 ---
 
-# Using Dask:
+## Using Dask:
 python
 Copy
 Edit
@@ -117,15 +115,14 @@ df_dask.head()
 
 print("Dask read time:", time.time() - start)
 
-
 ```
 ---
 
+
+## Using Modin:
+
 ```python
-#Using Modin:
-python
-Copy
-Edit
+
 import modin.pandas as mpd
 import os
 os.environ["MODIN_ENGINE"] = "ray"
@@ -146,17 +143,17 @@ print("Modin read time:", time.time() - start)
 ```
 ---
 
+## 🧹 Column Cleaning
+
 ```python
-🧹 Column Cleaning
-Column Name Cleaning (Validation Step)
 
-Stripping leading/trailing whitespace
+# Column Name Cleaning (Validation Step)
 
-Replacing special characters with _ using regex
+# Stripping leading/trailing whitespace
 
-python
-Copy
-Edit
+# Replacing special characters with _ using regex
+
+```python 
 import re
 
 def clean_columns(df):
@@ -167,16 +164,14 @@ df_clean = clean_columns(df_pandas.copy())  # Use Pandas version for simplicity
 
 
 ```
----<br>
+---
+
+## 💾 Save Column Names
+
+This snippet saves the column names and CSV separator into a schema.yaml file for reference or reuse.
 
 ```python
 
-💾 Save Column Names
-This snippet saves the column names and CSV separator into a schema.yaml file for reference or reuse.
-
-python
-Copy
-Edit
 import yaml
 
 schema = {
@@ -190,44 +185,49 @@ with open("schema.yaml", "w") as f:
 ```
 ---<br>
 
-```python
+## ✅ Validate Schema with YAML
 
-✅ Validate Schema with YAML
-python
-Copy
-Edit
+```python
 with open("schema.yaml") as f:
     schema_yaml = yaml.safe_load(f)
 
 assert schema_yaml["columns"] == list(df_clean.columns), "Column names don't match"
 assert df_clean.shape[1] == len(schema_yaml["columns"]), "Column count mismatch"
-📦 Write File in Pipe-Separated Gzip Format
-python
-Copy
-Edit
-output_file = "output_file.txt.gz"
-df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
 
-```
----<br>
-
-```python
-📊 Summary
-Total Rows: 3.47 million+
-
-Total Columns: 19
-
-File Size: ~375MB
-
-yaml
-Copy
-Edit
 
 ```
 ---
 
-This `README.md` now contains the complete content in a proper format for GitHub or any markdown-rendering platform. It includes headings, code blocks, explanations, and necessary details about the project. You can simply copy this into a `.md` file and it will render properly. 
+## 📦 Write File in Pipe-Separated Gzip Format
 
-Let me know if you need any further edits!
+
+output_file = "output_file.txt.gz"
+df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
+
+```
+---
+
+
+## 📊 Summary
+
+```python 
+import os
+
+summary = {
+    "total_rows": df_clean.shape[0],
+    "total_columns": df_clean.shape[1],
+    "file_size_MB": os.path.getsize(output_file) / (1024 * 1024)
+}
+
+print(summary)
+```
+---
+
+## Summary Output
+
+{'total_rows': 3475226, 'total_columns': 19, 'file_size_MB': 62.119622230529785}
+
+
+
 
 
