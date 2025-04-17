@@ -205,7 +205,7 @@ df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
 ```
 ---
 
-## 📦 Summary Report
+## Summary Report
 
 ```python
 import os
