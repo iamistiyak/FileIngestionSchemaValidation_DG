@@ -205,9 +205,9 @@ df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
 ```
 
 
-## 📊 Summary
-
 ```python 
+
+
 import os
 
 summary = {
@@ -220,11 +220,13 @@ print(summary)
 ```
 ---
 
-## Summary Output
+## 📊 Summary
+
+```python
 
 {'total_rows': 3475226, 'total_columns': 19, 'file_size_MB': 62.119622230529785}
 
-
+```
 
 
 
