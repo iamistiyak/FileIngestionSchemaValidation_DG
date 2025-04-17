@@ -198,7 +198,7 @@ assert df_clean.shape[1] == len(schema_yaml["columns"]), "Column count mismatch"
 
 ## 📦 Write File in Pipe-Separated Gzip Format
 
-
+```python
 output_file = "output_file.txt.gz"
 df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
 
@@ -207,7 +207,7 @@ df_clean.to_csv(output_file, sep='|', index=False, compression='gzip')
 
 ## 📦 Summary Report
 
-```python 
+```python
 import os
 
 summary = {
