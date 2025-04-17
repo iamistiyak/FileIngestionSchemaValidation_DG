@@ -181,7 +181,7 @@ with open("schema.yaml", "w") as f:
     yaml.dump(schema, f)
 
 ```
----<br>
+---
 
 ## ✅ Validate Schema with YAML
 
